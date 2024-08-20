@@ -25,10 +25,10 @@
     <h1>Divisão de Gastos</h1>
     <div>
         <h2>Pessoas: </h3>
-            <input type="text" id="txtp">
+            <input type="text" id="pessoa-input">
             <input type="button" value="Adicionar" onclick="adicionarPessoas()">
         <h2>Gastos:</h2>
-            <input type="number" id="txtg">
+            <input type="number" id="gasto-input">
             <input type="button" value="Calcular" onclick="divisaoDeGastos()">
         <br><select name="lista" id="lista" size="6"></select>
     </div>
@@ -36,24 +36,33 @@
     </div>
 </body>
 <script>
-    let arr = [];
-    let pessoas = document.getElementById('txtp')
-    let gastos = document.getElementById('txtg')
+    let pessoasList = [];
+    let pessoaInput = document.getElementById('pessoa-input')
+    let gastos = document.getElementById('gasto-input')
     let calculo = document.getElementById('res')
     let lista = document.getElementById('lista')
 
     function adicionarPessoas() {
-        let p = String(pessoas.value)
-        arr.push(p);
+        let p = String(pessoaInput.value)
+        pessoasList.push(p);
+
+        pessoaInput.value = ''
+        
+        console.log(pessoasList);
+
+        adicionarPessoaNaLista(p);
     }
 
     
     function divisaoDeGastos() {
-        let divisao = Number(gastos.value)
-        let resultado = divisao / arr.length
+        let gasto = Number(gastos.value)
+        let resultado = gasto / pessoasList.length
+
+        console.log(resultado);
+
     }
 
-    const teste = () => {
+    const adicionarPessoaNaLista = (p) => {
         let item = document.createElement('option');
         item.innerHTML += `${p}`
         lista.appendChild(item)
